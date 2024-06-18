@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_layout_footers",
+  "info": {
+    "displayName": "Footer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "address": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.address"
+    },
+    "sluzby": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.footer-sluzby"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_elements_feature_links",
+  "info": {
+    "displayName": "Feature Link"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": false
+    },
+    "isLink": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_elements_addresses",
+  "info": {
+    "displayName": "Address",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "header": {
+      "type": "string",
+      "required": true
+    },
+    "adresa": {
+      "type": "text",
+      "required": true
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.contact-link"
+    },
+    "socials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.social-link"
+    }
+  }
+}

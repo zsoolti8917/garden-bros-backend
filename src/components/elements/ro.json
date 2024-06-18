@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_elements_ros",
+  "info": {
+    "displayName": "RO",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "header": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

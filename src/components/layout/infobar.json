@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_layout_infobars",
+  "info": {
+    "displayName": "Infobar",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.contact-link"
+    },
+    "socialsText": {
+      "type": "string",
+      "required": false
+    },
+    "socialLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.social-link"
+    }
+  }
+}
