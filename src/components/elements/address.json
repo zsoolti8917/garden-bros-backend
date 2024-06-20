@@ -21,16 +21,6 @@
     "adresa": {
       "type": "text",
       "required": true
-    },
-    "contacts": {
-      "type": "component",
-      "repeatable": true,
-      "component": "links.contact-link"
-    },
-    "socials": {
-      "type": "component",
-      "repeatable": true,
-      "component": "links.social-link"
     }
   }
 }

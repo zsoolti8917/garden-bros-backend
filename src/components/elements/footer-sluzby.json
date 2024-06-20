@@ -18,10 +18,10 @@
       "type": "string",
       "required": true
     },
-    "links": {
-      "type": "component",
-      "repeatable": true,
-      "component": "links.link"
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
     }
   }
 }

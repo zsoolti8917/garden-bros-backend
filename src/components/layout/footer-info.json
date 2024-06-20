@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_layout_footer_infos",
+  "info": {
+    "displayName": "Footer Info"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "companyName": {
+      "type": "string"
+    },
+    "legalLinks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.link"
+    }
+  }
+}

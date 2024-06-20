@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_layout_header_infos",
+  "info": {
+    "displayName": "Header Info"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "socials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.social-link"
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.contact-link"
+    },
+    "socialsText": {
+      "type": "string"
+    }
+  }
+}

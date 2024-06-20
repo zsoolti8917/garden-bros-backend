@@ -11,8 +11,6 @@ export interface ElementsAddress extends Schema.Component {
     description: Attribute.Text & Attribute.Required;
     header: Attribute.String & Attribute.Required;
     adresa: Attribute.Text & Attribute.Required;
-    contacts: Attribute.Component<'links.contact-link', true>;
-    socials: Attribute.Component<'links.social-link', true>;
   };
 }
 
@@ -52,7 +50,11 @@ export interface ElementsFooterSluzby extends Schema.Component {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
     header: Attribute.String & Attribute.Required;
-    links: Attribute.Component<'links.link', true>;
+    categories: Attribute.Relation<
+      'elements.footer-sluzby',
+      'oneToMany',
+      'api::category.category'
+    >;
   };
 }
 
@@ -63,9 +65,26 @@ export interface ElementsRo extends Schema.Component {
     description: '';
   };
   attributes: {
+    text: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
+    isExternal: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    title: Attribute.String;
+    description: Attribute.Text & Attribute.Required;
+  };
+}
+
+export interface LayoutFooterInfo extends Schema.Component {
+  collectionName: 'components_layout_footer_infos';
+  info: {
+    displayName: 'Footer Info';
+  };
+  attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
-    header: Attribute.String & Attribute.Required;
+    companyName: Attribute.String;
+    legalLinks: Attribute.Component<'links.link', true>;
   };
 }
 
@@ -76,8 +95,25 @@ export interface LayoutFooter extends Schema.Component {
     description: '';
   };
   attributes: {
-    address: Attribute.Component<'elements.address'>;
-    sluzby: Attribute.Component<'elements.footer-sluzby', true>;
+    adresa: Attribute.Component<'elements.address'>;
+    sluzby: Attribute.Component<'elements.footer-sluzby'>;
+    ro: Attribute.Component<'elements.ro'>;
+    map: Attribute.Media<'images'> & Attribute.Required;
+    rotitle: Attribute.String & Attribute.Required;
+  };
+}
+
+export interface LayoutHeaderInfo extends Schema.Component {
+  collectionName: 'components_layout_header_infos';
+  info: {
+    displayName: 'Header Info';
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text;
+    socials: Attribute.Component<'links.social-link', true>;
+    contacts: Attribute.Component<'links.contact-link', true>;
+    socialsText: Attribute.String;
   };
 }
 
@@ -100,10 +136,12 @@ export interface LayoutLogo extends Schema.Component {
   collectionName: 'components_layout_logos';
   info: {
     displayName: 'Logo';
+    description: '';
   };
   attributes: {
     logoImg: Attribute.Media<'images'> & Attribute.Required;
     logoText: Attribute.String & Attribute.Required;
+    url: Attribute.String & Attribute.Required;
   };
 }
 
@@ -357,7 +395,9 @@ declare module '@strapi/types' {
       'elements.feature': ElementsFeature;
       'elements.footer-sluzby': ElementsFooterSluzby;
       'elements.ro': ElementsRo;
+      'layout.footer-info': LayoutFooterInfo;
       'layout.footer': LayoutFooter;
+      'layout.header-info': LayoutHeaderInfo;
       'layout.infobar': LayoutInfobar;
       'layout.logo': LayoutLogo;
       'layout.navbar': LayoutNavbar;

@@ -6,15 +6,32 @@
   },
   "options": {},
   "attributes": {
-    "address": {
+    "adresa": {
       "type": "component",
       "repeatable": false,
       "component": "elements.address"
     },
     "sluzby": {
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "elements.footer-sluzby"
+    },
+    "ro": {
+      "type": "component",
+      "repeatable": false,
+      "component": "elements.ro"
+    },
+    "map": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "rotitle": {
+      "type": "string",
+      "required": true
     }
   }
 }

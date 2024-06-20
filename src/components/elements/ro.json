@@ -6,16 +6,24 @@
   },
   "options": {},
   "attributes": {
-    "title": {
+    "text": {
       "type": "string",
       "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "isExternal": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "title": {
+      "type": "string"
     },
     "description": {
       "type": "text",
-      "required": true
-    },
-    "header": {
-      "type": "string",
       "required": true
     }
   }
