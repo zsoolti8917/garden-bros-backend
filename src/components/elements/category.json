@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_elements_categories",
+  "info": {
+    "displayName": "category"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "categoryName": {
+      "type": "string"
+    },
+    "question": {
+      "displayName": "Question",
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.question"
+    }
+  }
+}

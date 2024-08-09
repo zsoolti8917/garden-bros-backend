@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_elements_sluzby_sections",
+  "info": {
+    "displayName": "SluzbySections",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "header": {
+      "type": "string"
+    },
+    "info": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "IsRight": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "body": {
+      "type": "richtext"
+    },
+    "anchor": {
+      "type": "string"
+    }
+  }
+}

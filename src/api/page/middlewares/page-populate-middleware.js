@@ -10,6 +10,9 @@ const populate = {
       picture: {
         fields: ["url", "alternativeText", "caption", "width", "height"],
       },
+      image: {
+        fields: ["url", "alternativeText", "caption", "width", "height"],
+      },
       button: {
         populate: true,
       },
@@ -21,12 +24,43 @@ const populate = {
           },
         },
       },
+      category: {
+        populate: {
+          fields: ["title", "description", "categoryName"],
+          question: {
+            populate: {
+              fields: ["question", "answer"],
+            },
+          }
+        }
+      },
+      sluzbySections: {
+        populate: {
+          fields: ["title", "description", "header", "info", "anchor"],
+          image: {
+            fields: ["url", "alternativeText", "caption", "width", "height"],
+          },
+          isRight: {
+            populate: true,
+          }
+        }
+      },
       testimonials: {
         populate: {
           picture: {
             fields: ["url", "alternativeText", "caption", "width", "height"],
           },
         },
+      },
+      socials:{
+        populate: {
+          feilds: ["url", "text", "newTab", "social"]
+        }
+      },
+      contacts: {
+        populate: {
+          fields: ["url", "text", "type"]
+        }
       },
       plans: {
         populate: ["product_features"],

@@ -18,20 +18,15 @@
     },
     "ro": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "elements.ro"
-    },
-    "map": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
     },
     "rotitle": {
       "type": "string",
       "required": true
+    },
+    "mapUrl": {
+      "type": "text"
     }
   }
 }

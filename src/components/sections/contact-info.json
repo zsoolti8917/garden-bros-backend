@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_sections_contact_infos",
+  "info": {
+    "displayName": "Contact Info",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "header": {
+      "type": "string"
+    },
+    "socials": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.social-link"
+    },
+    "contacts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "links.contact-link"
+    },
+    "adresa": {
+      "type": "string"
+    },
+    "ico": {
+      "type": "string"
+    },
+    "dic": {
+      "type": "string"
+    },
+    "socialsText": {
+      "type": "string"
+    }
+  }
+}

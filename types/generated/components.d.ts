@@ -14,6 +14,19 @@ export interface ElementsAddress extends Schema.Component {
   };
 }
 
+export interface ElementsCategory extends Schema.Component {
+  collectionName: 'components_elements_categories';
+  info: {
+    displayName: 'category';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    categoryName: Attribute.String;
+    question: Attribute.Component<'elements.question', true>;
+  };
+}
+
 export interface ElementsFeatureLink extends Schema.Component {
   collectionName: 'components_elements_feature_links';
   info: {
@@ -58,6 +71,17 @@ export interface ElementsFooterSluzby extends Schema.Component {
   };
 }
 
+export interface ElementsQuestion extends Schema.Component {
+  collectionName: 'components_elements_questions';
+  info: {
+    displayName: 'Question';
+  };
+  attributes: {
+    question: Attribute.Text;
+    answer: Attribute.Text;
+  };
+}
+
 export interface ElementsRo extends Schema.Component {
   collectionName: 'components_elements_ros';
   info: {
@@ -72,6 +96,24 @@ export interface ElementsRo extends Schema.Component {
       Attribute.DefaultTo<false>;
     title: Attribute.String;
     description: Attribute.Text & Attribute.Required;
+  };
+}
+
+export interface ElementsSluzbySections extends Schema.Component {
+  collectionName: 'components_elements_sluzby_sections';
+  info: {
+    displayName: 'SluzbySections';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.String;
+    header: Attribute.String;
+    info: Attribute.Text;
+    image: Attribute.Media<'images'> & Attribute.Required;
+    IsRight: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<true>;
+    body: Attribute.RichText;
+    anchor: Attribute.String;
   };
 }
 
@@ -97,9 +139,9 @@ export interface LayoutFooter extends Schema.Component {
   attributes: {
     adresa: Attribute.Component<'elements.address'>;
     sluzby: Attribute.Component<'elements.footer-sluzby'>;
-    ro: Attribute.Component<'elements.ro'>;
-    map: Attribute.Media<'images'> & Attribute.Required;
+    ro: Attribute.Component<'elements.ro', true>;
     rotitle: Attribute.String & Attribute.Required;
+    mapUrl: Attribute.Text;
   };
 }
 
@@ -231,6 +273,25 @@ export interface MetaMetadata extends Schema.Component {
   };
 }
 
+export interface SectionsContactInfo extends Schema.Component {
+  collectionName: 'components_sections_contact_infos';
+  info: {
+    displayName: 'Contact Info';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    header: Attribute.String;
+    socials: Attribute.Component<'links.social-link', true>;
+    contacts: Attribute.Component<'links.contact-link', true>;
+    adresa: Attribute.String;
+    ico: Attribute.String;
+    dic: Attribute.String;
+    socialsText: Attribute.String;
+  };
+}
+
 export interface SectionsCorp extends Schema.Component {
   collectionName: 'components_sections_corps';
   info: {
@@ -244,6 +305,16 @@ export interface SectionsCorp extends Schema.Component {
     body: Attribute.String & Attribute.Required;
     button: Attribute.Component<'links.button-link'>;
     features: Attribute.Component<'elements.feature', true>;
+  };
+}
+
+export interface SectionsFaq extends Schema.Component {
+  collectionName: 'components_sections_faqs';
+  info: {
+    displayName: 'faq';
+  };
+  attributes: {
+    category: Attribute.Component<'elements.category', true>;
   };
 }
 
@@ -277,11 +348,12 @@ export interface SectionsInfo extends Schema.Component {
   collectionName: 'components_sections_infos';
   info: {
     displayName: 'Info';
+    description: '';
   };
   attributes: {
     title: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
-    image: Attribute.Media<'images'> & Attribute.Required;
+    picture: Attribute.Media<'images'> & Attribute.Required;
     rok: Attribute.String;
     smallText: Attribute.String;
     header: Attribute.String & Attribute.Required;
@@ -305,6 +377,19 @@ export interface SectionsProjekty extends Schema.Component {
       'oneToMany',
       'api::article.article'
     >;
+  };
+}
+
+export interface SectionsSluzbyInfo extends Schema.Component {
+  collectionName: 'components_sections_sluzby_infos';
+  info: {
+    displayName: 'SluzbyInfo';
+    description: '';
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    sluzbySections: Attribute.Component<'elements.sluzby-sections', true>;
   };
 }
 
@@ -391,10 +476,13 @@ declare module '@strapi/types' {
   export module Shared {
     export interface Components {
       'elements.address': ElementsAddress;
+      'elements.category': ElementsCategory;
       'elements.feature-link': ElementsFeatureLink;
       'elements.feature': ElementsFeature;
       'elements.footer-sluzby': ElementsFooterSluzby;
+      'elements.question': ElementsQuestion;
       'elements.ro': ElementsRo;
+      'elements.sluzby-sections': ElementsSluzbySections;
       'layout.footer-info': LayoutFooterInfo;
       'layout.footer': LayoutFooter;
       'layout.header-info': LayoutHeaderInfo;
@@ -407,11 +495,14 @@ declare module '@strapi/types' {
       'links.link': LinksLink;
       'links.social-link': LinksSocialLink;
       'meta.metadata': MetaMetadata;
+      'sections.contact-info': SectionsContactInfo;
       'sections.corp': SectionsCorp;
+      'sections.faq': SectionsFaq;
       'sections.features': SectionsFeatures;
       'sections.hero': SectionsHero;
       'sections.info': SectionsInfo;
       'sections.projekty': SectionsProjekty;
+      'sections.sluzby-info': SectionsSluzbyInfo;
       'sections.sluzby': SectionsSluzby;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;

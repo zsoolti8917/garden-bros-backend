@@ -1099,7 +1099,10 @@ export interface ApiPagePage extends Schema.CollectionType {
         'sections.features',
         'sections.hero',
         'sections.info',
-        'sections.projekty'
+        'sections.projekty',
+        'sections.faq',
+        'sections.sluzby-info',
+        'sections.contact-info'
       ]
     > &
       Attribute.SetPluginOptions<{

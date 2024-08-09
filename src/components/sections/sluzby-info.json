@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_sluzby_infos",
+  "info": {
+    "displayName": "SluzbyInfo",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "sluzbySections": {
+      "displayName": "SluzbySections",
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.sluzby-sections"
+    }
+  }
+}
