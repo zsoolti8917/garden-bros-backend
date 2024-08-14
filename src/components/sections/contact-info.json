@@ -12,7 +12,7 @@
     "description": {
       "type": "text"
     },
-    "header": {
+    "headerPhone": {
       "type": "string"
     },
     "socials": {
@@ -36,6 +36,17 @@
     },
     "socialsText": {
       "type": "string"
+    },
+    "headerAdresa": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

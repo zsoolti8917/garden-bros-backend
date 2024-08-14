@@ -282,13 +282,15 @@ export interface SectionsContactInfo extends Schema.Component {
   attributes: {
     title: Attribute.String;
     description: Attribute.Text;
-    header: Attribute.String;
+    headerPhone: Attribute.String;
     socials: Attribute.Component<'links.social-link', true>;
     contacts: Attribute.Component<'links.contact-link', true>;
     adresa: Attribute.String;
     ico: Attribute.String;
     dic: Attribute.String;
     socialsText: Attribute.String;
+    headerAdresa: Attribute.String;
+    image: Attribute.Media<'images'> & Attribute.Required;
   };
 }
 
