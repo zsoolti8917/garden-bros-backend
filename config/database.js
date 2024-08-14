@@ -8,7 +8,7 @@ module.exports = ({ env }) => ({
       port: env.int('DATABASE_PORT', 5432),
       database: env('DATABASE_NAME', 'gardenbros'),
       user: env('DATABASE_USERNAME', 'postgres'),
-      password: env('DATABASE_PASSWORD', 'code'),
+      password: env('DATABASE_PASSWORD', 'LiliYoGoloim1-'),
       schema: env('DATABASE_SCHEMA', 'public'), // Not required
       ssl: env.bool('DATABASE_SSL', false) && {
         rejectUnauthorized: env.bool('DATABASE_SSL_SELF', false), // For self-signed certificates
