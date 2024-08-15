@@ -71,7 +71,23 @@ The Garden Bros Backend is a robust backend solution for managing a gardening co
 
     Ensure Dokku is installed and configured on your VPS. Refer to the [Dokku documentation](https://dokku.com/docs/) for installation and setup instructions.
 
-2.  **Deploy to VPS**
+2.  **Create PostgreSQL Database**
+
+    On your VPS, create a PostgreSQL database for your project:
+
+    ```bash
+    dokku postgres:create garden-bros-db
+    ```
+
+3.  **Link Database to Your App**
+
+    Link the newly created database to your Dokku app:
+
+    ```bash
+    dokku postgres:link garden-bros-db your-app-name
+    ```
+
+4.  **Deploy to VPS**
 
     On your local machine:
 
@@ -80,7 +96,7 @@ The Garden Bros Backend is a robust backend solution for managing a gardening co
     git push dokku main
     ```
 
-3.  **Configure SSL and Reverse Proxy**
+5.  **Configure SSL and Reverse Proxy**
 
     Dokku supports SSL and reverse proxy configurations out-of-the-box. You can use the following commands to set them up:
 
@@ -90,9 +106,21 @@ The Garden Bros Backend is a robust backend solution for managing a gardening co
     dokku letsencrypt:cron-job --add
     ```
 
+## Importing Data to Strapi on VPS
+
+To transfer data from your local Strapi instance to the one running on your VPS, you can use the following command:
+
+```bash
+npm run strapi transfer -- --to [https://example.com/admin](https://example.com/admin) --to-token my-transfer-token --force
+```
+Important:
+* Replace https://example.com/admin with the actual URL of your Strapi admin panel on the VPS.
+* Replace my-transfer-token with a valid transfer token generated in your Strapi admin settings on the VPS.
+* The --force flag will overwrite any existing data on the VPS with the data from your local machine. Use with caution!
+* 
 ## Database Management
 
-The PostgreSQL database is hosted on the same VPS. Ensure that your database configuration in the `.env` file matches the credentials used on the VPS. You can manage the database using tools like `psql` or PgAdmin.
+The PostgreSQL database is hosted on the same VPS. Ensure that your database configuration in the `.env` file matches the credentials used on the VPS.
 
 ## Strapi CMS Configuration
 
