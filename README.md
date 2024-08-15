@@ -1,57 +1,101 @@
-# 🚀 Getting started with Strapi
+# Garden Bros Backend
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+## Overview
 
-### `develop`
+The Garden Bros Backend is a robust backend solution for managing a gardening company's website. It is built with Strapi CMS, hosted on a VPS with Dokku, and utilizes PostgreSQL for database management. The setup includes SSL certification and reverse proxy configurations to ensure secure and efficient operations.
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+## Features
 
-```
-npm run develop
-# or
-yarn develop
-```
+*   **Strapi CMS:** Provides a user-friendly interface for content management.
+*   **VPS Hosting:** Deployed on a VPS from Forpsi.
+*   **Dokku Environment:** Containerized deployment using Dokku.
+*   **PostgreSQL Database:** Managed on the same VPS, shared with other projects.
+*   **SSL Certificate:** Ensures secure connections.
+*   **Reverse Proxy:** Configured for optimized routing and load balancing.
 
-### `start`
+## Getting Started
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+### Prerequisites
 
-```
-npm run start
-# or
-yarn start
-```
+*   **Node.js:** Ensure Node.js is installed on your local machine.
+*   **Docker:** Required for containerization (optional, if using Dokku).
+*   **VPS Access:** SSH access to the VPS where Dokku is set up.
+*   **Strapi CMS:** Familiarity with Strapi CMS for content management.
 
-### `build`
+### Installation
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+1.  **Clone the Repository**
 
-```
-npm run build
-# or
-yarn build
-```
+    ```bash
+    git clone [https://github.com/your-repository/garden-bros-backend.git](https://github.com/your-repository/garden-bros-backend.git)
+    cd garden-bros-backend
+    ```
 
-## ⚙️ Deployment
+2.  **Install Dependencies**
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+    ```bash
+    npm install
+    ```
 
-## 📚 Learn more
+3.  **Configure Environment Variables**
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+    Create a `.env` file in the root directory and add the following environment variables:
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+    ```
+    DATABASE_CLIENT=postgres
+    DATABASE_NAME=garden_bros
+    DATABASE_HOST=localhost
+    DATABASE_PORT=5432
+    DATABASE_USERNAME=your_username
+    DATABASE_PASSWORD=your_password
+    ```
 
-## ✨ Community
+4.  **Run Strapi**
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+    *   For local development:
 
----
+        ```bash
+        npm run develop
+        ```
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+    *   For production:
+
+        ```bash
+        npm run build
+        npm start
+        ```
+
+## Deployment
+
+1.  **Set Up Dokku**
+
+    Ensure Dokku is installed and configured on your VPS. Refer to the [Dokku documentation](https://dokku.com/docs/) for installation and setup instructions.
+
+2.  **Deploy to VPS**
+
+    On your local machine:
+
+    ```bash
+    git remote add dokku dokku@your-vps-ip:your-app-name
+    git push dokku main
+    ```
+
+3.  **Configure SSL and Reverse Proxy**
+
+    Dokku supports SSL and reverse proxy configurations out-of-the-box. You can use the following commands to set them up:
+
+    ```bash
+    dokku domains:add your-app-name your-domain.com
+    dokku letsencrypt:enable your-app-name
+    dokku letsencrypt:cron-job --add
+    ```
+
+## Database Management
+
+The PostgreSQL database is hosted on the same VPS. Ensure that your database configuration in the `.env` file matches the credentials used on the VPS. You can manage the database using tools like `psql` or PgAdmin.
+
+## Strapi CMS Configuration
+
+*   **Admin Panel:** Access the Strapi admin panel at `http://your-domain.com/admin` to manage content.
+*   **Content Types:** Configure content types and relations via the admin panel.
+*   **Roles & Permissions:** Set up roles and permissions according to your project requirements.
