@@ -2,377 +2,128 @@
 
 ## Overview
 
-Garden Bros Backend is a comprehensive content management system built with **Strapi v4.24.5** for a Czech gardening company. This headless CMS provides a robust API for managing website content, including services (sluzby), projects (projekty), articles, and global site configuration. The application features multilingual support (i18n), dynamic content sections, and a sophisticated component-based architecture.
+The Garden Bros Backend is a robust backend solution for managing a gardening company's website. It is built with Strapi CMS, hosted on a VPS with Dokku, and utilizes PostgreSQL for database management. The setup includes SSL certification and reverse proxy configurations to ensure secure and efficient operations.
 
-## Key Features
+## Features
 
-### 🏗️ **Architecture & Technology Stack**
-- **Strapi CMS v4.24.5:** Modern headless CMS with REST/GraphQL APIs
-- **Node.js 18+:** Runtime environment with npm package management
-- **PostgreSQL:** Primary database for production environments
-- **SQLite:** Development database (better-sqlite3)
-- **Docker Support:** Containerized deployment with multi-stage builds
-- **Dokku Deployment:** PaaS deployment on VPS infrastructure
-
-### 🌍 **Internationalization (i18n)**
-- Multi-language content support
-- Localized content types and components
-- Language-specific SEO optimization
-
-### 📄 **Content Types**
-- **Articles:** Blog posts with categories, authors, and dynamic content blocks
-- **Pages:** Dynamic pages with customizable content sections
-- **Authors:** Author profiles with avatar and contact information
-- **Categories:** Content categorization system
-- **Global:** Site-wide settings including navigation, footer, and metadata
-
-### 🧩 **Component System**
-- **Layout Components:** Navbar, Footer, Header/Footer Info
-- **Section Components:** Hero, Services (Sluzby), Features, FAQ, Contact Info, Projects (Projekty)
-- **Element Components:** Feature Links, Addresses, Questions, Service Sections
-- **Shared Components:** SEO, Media, Rich Text, Quotes, Sliders, Video Embeds
-- **Link Components:** Buttons, Navigation Links, Social Links, Contact Links
-
-## Project Structure
-
-```
-garden-bros-backend/
-├── config/                     # Strapi configuration files
-│   ├── admin.js               # Admin panel configuration
-│   ├── api.js                 # API configuration
-│   ├── database.js            # Database connection settings
-│   ├── middlewares.js         # Middleware configuration
-│   ├── plugins.js             # Plugin configuration
-│   └── server.js              # Server configuration
-├── src/
-│   ├── api/                   # API endpoints and business logic
-│   │   ├── article/           # Article content type
-│   │   ├── author/            # Author content type
-│   │   ├── category/          # Category content type
-│   │   ├── global/            # Global settings (single type)
-│   │   └── page/              # Page content type with middleware
-│   ├── components/            # Reusable Strapi components
-│   │   ├── elements/          # UI elements (features, addresses, etc.)
-│   │   ├── layout/            # Layout components (navbar, footer)
-│   │   ├── links/             # Link components (buttons, social links)
-│   │   ├── meta/              # Metadata components
-│   │   ├── sections/          # Page sections (hero, services, FAQ)
-│   │   └── shared/            # Shared components (SEO, media, rich text)
-│   ├── admin/                 # Admin panel customizations
-│   └── index.js               # Application entry point
-├── types/generated/           # TypeScript type definitions
-├── database/migrations/       # Database migration files
-├── public/uploads/            # Media upload directory
-├── Dockerfile                 # Docker configuration for development
-├── Dockerfile.prod           # Docker configuration for production
-└── package.json              # Dependencies and scripts
-```
+*   **Strapi CMS:** Provides a user-friendly interface for content management.
+*   **VPS Hosting:** Deployed on a VPS from Forpsi.
+*   **Dokku Environment:** Containerized deployment using Dokku.
+*   **PostgreSQL Database:** Managed on the same VPS, shared with other projects.
+*   **SSL Certificate:** Ensures secure connections.
+*   **Reverse Proxy:** Configured for optimized routing and load balancing.
 
 ## Getting Started
 
 ### Prerequisites
 
-- **Node.js 18+:** Required runtime environment
-- **npm 6+:** Package manager
-- **PostgreSQL:** For production database
-- **Docker:** Optional, for containerized development
-- **Git:** Version control
+*   **Node.js:** Ensure Node.js is installed on your local machine.
+*   **Docker:** Required for containerization (optional, if using Dokku).
+*   **VPS Access:** SSH access to the VPS where Dokku is set up.
+*   **Strapi CMS:** Familiarity with Strapi CMS for content management.
 
 ### Installation
 
-1. **Clone the Repository**
-   ```bash
-   git clone <repository-url>
-   cd garden-bros-backend
-   ```
+1.  **Clone the Repository**
 
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+    ```bash
+    git clone [https://github.com/your-repository/garden-bros-backend.git](https://github.com/your-repository/garden-bros-backend.git)
+    cd garden-bros-backend
+    ```
 
-3. **Environment Configuration**
-   
-   Copy the example environment file and configure:
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Update `.env` with your configuration:
-   ```env
-   HOST=0.0.0.0
-   PORT=1337
-   APP_KEYS="your-app-keys-here"
-   API_TOKEN_SALT=your-api-token-salt
-   ADMIN_JWT_SECRET=your-admin-jwt-secret
-   TRANSFER_TOKEN_SALT=your-transfer-token-salt
-   JWT_SECRET=your-jwt-secret
-   
-   # Database Configuration
-   DATABASE_HOST=127.0.0.1
-   DATABASE_PORT=5432
-   DATABASE_NAME=gardenbros
-   DATABASE_USERNAME=postgres
-   DATABASE_PASSWORD=your-password
-   DATABASE_SSL=false
-   ```
+2.  **Install Dependencies**
 
-4. **Development Server**
-   ```bash
-   npm run develop
-   ```
-   
-   Access the admin panel at: `http://localhost:1337/admin`
+    ```bash
+    npm install
+    ```
 
-5. **Production Build**
-   ```bash
-   npm run build
-   npm start
-   ```
+3.  **Configure Environment Variables**
 
-## Content Architecture
+    Create a `.env` file in the root directory and add the following environment variables:
 
-### Content Types Overview
+    ```
+    DATABASE_CLIENT=postgres
+    DATABASE_NAME=garden_bros
+    DATABASE_HOST=localhost
+    DATABASE_PORT=5432
+    DATABASE_USERNAME=your_username
+    DATABASE_PASSWORD=your_password
+    ```
 
-#### 📰 **Articles** (Collection Type)
-- **Purpose:** Blog posts and news articles
-- **Features:** i18n support, draft/publish workflow
-- **Fields:** Title, description, slug, cover image, category relation, author relation
-- **Dynamic Content:** Rich text, media, quotes, sliders, video embeds
-- **SEO:** Built-in SEO component with meta tags and social sharing
+4.  **Run Strapi**
 
-#### 👤 **Authors** (Collection Type)
-- **Purpose:** Author profiles and biographical information
-- **Fields:** Name, avatar, email
-- **Relations:** One-to-many with articles
+    *   For local development:
 
-#### 🏷️ **Categories** (Collection Type)
-- **Purpose:** Content categorization system
-- **Relations:** One-to-many with articles
+        ```bash
+        npm run develop
+        ```
 
-#### 📄 **Pages** (Collection Type)
-- **Purpose:** Dynamic website pages with flexible content sections
-- **Features:** i18n support, slug-based routing
-- **Content Sections:** Hero, Services, Features, Projects, FAQ, Contact Info
-- **Custom Middleware:** Enhanced population for nested components
+    *   For production:
 
-#### 🌐 **Global** (Single Type)
-- **Purpose:** Site-wide configuration and settings
-- **Components:** Navigation, footer, metadata, favicon
-- **Features:** i18n support for multi-language sites
+        ```bash
+        npm run build
+        npm start
+        ```
 
-### Component System
+## Deployment
 
-The application uses a sophisticated component-based architecture:
+1.  **Set Up Dokku**
 
-#### **Layout Components**
-- `navbar`: Navigation with links and logo
-- `footer`: Site footer with address, services, and contact info
-- `header-info` & `footer-info`: Additional header/footer content
+    Ensure Dokku is installed and configured on your VPS. Refer to the [Dokku documentation](https://dokku.com/docs/) for installation and setup instructions.
 
-#### **Section Components**
-- `hero`: Landing page hero sections with CTA buttons
-- `sluzby`: Services showcase with features
-- `features`: Feature listings with icons and descriptions
-- `projekty`: Project galleries and showcases
-- `faq`: Frequently asked questions
-- `contact-info`: Contact forms and information
+2.  **Create PostgreSQL Database**
 
-#### **Shared Components**
-- `seo`: Meta tags, descriptions, and social sharing
-- `media`: Image and video handling
-- `rich-text`: WYSIWYG content editing
-- `slider`: Image carousels and galleries
+    On your VPS, create a PostgreSQL database for your project:
 
-## API Endpoints
+    ```bash
+    dokku postgres:create garden-bros-db
+    ```
 
-### REST API
-- **Articles:** `/api/articles`
-- **Authors:** `/api/authors`
-- **Categories:** `/api/categories`
-- **Pages:** `/api/pages`
-- **Global:** `/api/global`
+3.  **Link Database to Your App**
 
-### GraphQL
-Available at `/graphql` endpoint with full query and mutation support.
+    Link the newly created database to your Dokku app:
 
-## Docker Deployment
+    ```bash
+    dokku postgres:link garden-bros-db your-app-name
+    ```
 
-> **⚠️ Important:** For persistent media storage, see [DOCKER_DEPLOYMENT.md](./DOCKER_DEPLOYMENT.md) for detailed instructions.
+4.  **Deploy to VPS**
 
-### Quick Start with Docker Compose
+    On your local machine:
 
-**Development:**
-```bash
-cp .env.example .env
-# Edit .env with your configuration
-docker-compose up -d
-```
+    ```bash
+    git remote add dokku dokku@your-vps-ip:your-app-name
+    git push dokku main
+    ```
 
-**Production:**
-```bash
-cp .env.example .env
-# Edit .env with production values
-docker-compose -f docker-compose.prod.yml up -d
-```
+5.  **Configure SSL and Reverse Proxy**
 
-### Manual Docker Commands
+    Dokku supports SSL and reverse proxy configurations out-of-the-box. You can use the following commands to set them up:
 
-**Development:**
-```bash
-docker build -f Dockerfile -t garden-bros-dev .
-docker run -d -p 1337:1337 \
-  -v garden-bros-uploads:/opt/app/public/uploads \
-  --env-file .env garden-bros-dev
-```
+    ```bash
+    dokku domains:add your-app-name your-domain.com
+    dokku letsencrypt:enable your-app-name
+    dokku letsencrypt:cron-job --add
+    ```
 
-**Production:**
-```bash
-docker build -f Dockerfile.prod -t garden-bros-prod .
-docker run -d -p 1337:1337 \
-  -v garden-bros-uploads:/opt/app/public/uploads \
-  --env-file .env garden-bros-prod
-```
+## Importing Data to Strapi on VPS
 
-### Features
-- **Persistent Storage:** Media uploads survive container restarts
-- **Database Integration:** PostgreSQL container included
-- **Environment Configuration:** Easy setup with .env files
-- **Development/Production:** Separate configurations for different environments
-
-## Dokku Deployment
-
-1. **Setup Dokku App**
-   ```bash
-   dokku apps:create garden-bros-backend
-   ```
-
-2. **Configure Database**
-   ```bash
-   dokku postgres:create garden-bros-db
-   dokku postgres:link garden-bros-db garden-bros-backend
-   ```
-
-3. **Set Environment Variables**
-   ```bash
-   dokku config:set garden-bros-backend APP_KEYS="key1,key2,key3,key4"
-   dokku config:set garden-bros-backend API_TOKEN_SALT=your-salt
-   dokku config:set garden-bros-backend ADMIN_JWT_SECRET=your-secret
-   ```
-
-4. **Deploy**
-   ```bash
-   git remote add dokku dokku@your-server:garden-bros-backend
-   git push dokku main
-   ```
-
-5. **SSL Configuration**
-   ```bash
-   dokku domains:add garden-bros-backend your-domain.com
-   dokku letsencrypt:enable garden-bros-backend
-   ```
-
-## Data Management
-
-### Content Transfer
-Transfer content between environments:
-```bash
-npm run strapi transfer -- --to https://your-domain.com/admin --to-token your-transfer-token
-```
-
-### Database Backup
-```bash
-# Backup
-dokku postgres:export garden-bros-db > backup.sql
-
-# Restore
-dokku postgres:import garden-bros-db < backup.sql
-```
-
-## Development Workflow
-
-1. **Local Development:** Use SQLite for rapid development
-2. **Content Creation:** Build content structure in admin panel
-3. **API Testing:** Test endpoints with Postman or similar tools
-4. **Production Deploy:** Deploy to Dokku with PostgreSQL
-5. **Content Migration:** Transfer content using Strapi transfer tool
-
-## Available Scripts
+To transfer data from your local Strapi instance to the one running on your VPS, you can use the following command:
 
 ```bash
-npm run develop    # Start development server with auto-reload
-npm run start      # Start production server
-npm run build      # Build admin panel for production
-npm run strapi     # Access Strapi CLI commands
+npm run strapi transfer -- --to [https://example.com/admin](https://example.com/admin) --to-token my-transfer-token --force
 ```
+Important:
+* Replace https://example.com/admin with the actual URL of your Strapi admin panel on the VPS.
+* Replace my-transfer-token with a valid transfer token generated in your Strapi admin settings on the VPS.
+* The --force flag will overwrite any existing data on the VPS with the data from your local machine. Use with caution!
+* 
+## Database Management
 
-## Key Dependencies
+The PostgreSQL database is hosted on the same VPS. Ensure that your database configuration in the `.env` file matches the credentials used on the VPS.
 
-- **@strapi/strapi:** Core Strapi framework (v4.24.5)
-- **@strapi/plugin-i18n:** Internationalization support
-- **@strapi/plugin-users-permissions:** User authentication and permissions
-- **pg:** PostgreSQL database driver
-- **better-sqlite3:** SQLite database for development
-- **react:** Frontend framework for admin panel
+## Strapi CMS Configuration
 
-## Custom Features
-
-### Page Population Middleware
-The application includes a custom middleware (`page-populate-middleware.js`) that automatically populates nested components and relations for page requests, ensuring complete data retrieval for complex page structures.
-
-### Czech Language Support
-The CMS is specifically configured for Czech content with components named in Czech (e.g., "sluzby" for services, "projekty" for projects), reflecting the target market.
-
-### Dynamic Content Sections
-Pages use a dynamic zone system allowing content editors to mix and match different section types (hero, services, features, etc.) to create flexible page layouts.
-
-## Security & Performance
-
-- **Environment Variables:** Sensitive configuration stored in environment variables
-- **Database SSL:** Configurable SSL support for database connections
-- **Media Optimization:** Built-in image processing with Sharp
-- **CORS Configuration:** Proper cross-origin resource sharing setup
-- **Rate Limiting:** Built-in API rate limiting and security middleware
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Database Connection Errors**
-   - Verify PostgreSQL is running
-   - Check database credentials in `.env`
-   - Ensure database exists and user has proper permissions
-
-2. **Build Failures**
-   - Clear node_modules and reinstall: `rm -rf node_modules && npm install`
-   - Check Node.js version compatibility (18-20.x)
-
-3. **Media Upload Issues**
-   - Verify `public/uploads` directory permissions
-   - Check available disk space
-   - Review file size limits in Strapi configuration
-
-### Logs and Debugging
-```bash
-# View application logs
-npm run develop -- --debug
-
-# View Dokku logs
-dokku logs garden-bros-backend --tail
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/new-feature`
-3. Commit changes: `git commit -am 'Add new feature'`
-4. Push to branch: `git push origin feature/new-feature`
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the package.json file for details.
-
----
-
-**Garden Bros Backend** - A modern, scalable CMS solution for the gardening industry, built with Strapi and designed for Czech market requirements.
+*   **Admin Panel:** Access the Strapi admin panel at `http://your-domain.com/admin` to manage content.
+*   **Content Types:** Configure content types and relations via the admin panel.
+*   **Roles & Permissions:** Set up roles and permissions according to your project requirements.
