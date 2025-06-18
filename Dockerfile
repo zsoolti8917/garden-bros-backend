@@ -14,5 +14,9 @@ ENV PATH /opt/node_modules/.bin:$PATH
 RUN chown -R node:node /opt/app
 USER node
 RUN ["npm", "run", "build"]
+
+# Create volume for persistent uploads
+VOLUME ["/opt/app/public/uploads"]
+
 EXPOSE 1337
 CMD ["npm", "run", "develop"]
